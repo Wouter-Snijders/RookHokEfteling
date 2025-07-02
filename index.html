@@ -15,7 +15,6 @@
       height: 100%;
       width: 100%;
       overflow: hidden;
-      cursor: pointer; /* Laat zien dat je kunt klikken */
     }
 
     body {
@@ -24,6 +23,21 @@
       background-position: center;
       background-repeat: no-repeat;
       background-attachment: fixed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #fullscreenBtn {
+      padding: 15px 25px;
+      font-size: 1.2em;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 20px;
     }
 
     audio {
@@ -32,39 +46,30 @@
       right: 20px;
       z-index: 1000;
     }
-
-    .hint {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      color: white;
-      font-size: 1.2em;
-      background-color: rgba(0,0,0,0.5);
-      padding: 10px 15px;
-      border-radius: 10px;
-      z-index: 999;
-    }
   </style>
 </head>
-<body onclick="goFullscreen()">
-  <div class="hint">Klik ergens om fullscreen te gaan</div>
+<body>
+  <button id="fullscreenBtn">Ga fullscreen</button>
+
   <audio autoplay loop controls>
     <source src="music.mp3" type="audio/mpeg">
     Je browser ondersteunt het audio-element niet.
   </audio>
 
   <script>
-    function goFullscreen() {
+    document.getElementById('fullscreenBtn').addEventListener('click', () => {
       const element = document.documentElement;
 
       if (element.requestFullscreen) {
         element.requestFullscreen();
-      } else if (element.webkitRequestFullscreen) { // Safari
+      } else if (element.webkitRequestFullscreen) { // Safari (niet iOS)
         element.webkitRequestFullscreen();
       } else if (element.msRequestFullscreen) { // IE11
         element.msRequestFullscreen();
+      } else {
+        alert("Fullscreen wordt niet ondersteund op dit apparaat.");
       }
-    }
+    });
   </script>
 </body>
 </html>
