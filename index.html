@@ -1,43 +1,70 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rookhok</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rookhok</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        html, body {
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-        }
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      cursor: pointer; /* Laat zien dat je kunt klikken */
+    }
 
-        body {
-            background-image: url('image.png'); /* Zorg dat dit pad klopt */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
+    body {
+      background-image: url('image.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
 
-        audio {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-    </style>
+    audio {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .hint {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: white;
+      font-size: 1.2em;
+      background-color: rgba(0,0,0,0.5);
+      padding: 10px 15px;
+      border-radius: 10px;
+      z-index: 999;
+    }
+  </style>
 </head>
-<body>
-    <audio autoplay loop controls>
-        <source src="music.mp3" type="audio/mpeg">
-        Je browser ondersteunt het audio-element niet.
-    </audio>
+<body onclick="goFullscreen()">
+  <div class="hint">Klik ergens om fullscreen te gaan</div>
+  <audio autoplay loop controls>
+    <source src="music.mp3" type="audio/mpeg">
+    Je browser ondersteunt het audio-element niet.
+  </audio>
+
+  <script>
+    function goFullscreen() {
+      const element = document.documentElement;
+
+      if (element.requestFullscreen) {
+        element.requestFullscreen();
+      } else if (element.webkitRequestFullscreen) { // Safari
+        element.webkitRequestFullscreen();
+      } else if (element.msRequestFullscreen) { // IE11
+        element.msRequestFullscreen();
+      }
+    }
+  </script>
 </body>
 </html>
-
